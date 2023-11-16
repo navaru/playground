@@ -3,11 +3,12 @@
 	"version": "0.0.0",
 	"scripts": {
 		"start": "vite",
-		"dev": "vite",
+		"dev": "panda codegen --clean && vite",
 		"build": "vite build",
 		"serve": "vite preview"
 	},
 	"devDependencies": {
+		"@pandacss/dev": "latest",
 		"typescript": "^5",
 		"vite": "^4",
 		"vite-plugin-solid": "^2",

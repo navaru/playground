@@ -1,14 +1,9 @@
-export default function Main() {
-	const style = `
-		display: flex;
-		flex: 1;
-		justify-content: center;
-		align-items: center;
-	`
+import { Stack } from "$panda/jsx"
 
+export default function Main() {
 	return (
-		<div style={style}>
+		<Stack flex="1" justify="center" align="center">
 			<h1>Playground</h1>
-		</div>
+		</Stack>
 	)
 }
