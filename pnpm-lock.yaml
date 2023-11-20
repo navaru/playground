@@ -8,6 +8,9 @@ dependencies:
   '@atlaskit/pragmatic-drag-and-drop':
     specifier: latest
     version: 0.24.0
+  '@atlaskit/pragmatic-drag-and-drop-hitbox':
+    specifier: ^0.12.0
+    version: 0.12.0
   '@solidjs/router':
     specifier: latest
     version: 0.9.1(solid-js@1.8.5)
@@ -142,6 +145,13 @@ packages:
     dependencies:
       undici: 5.27.2
     dev: true
+
+  /@atlaskit/pragmatic-drag-and-drop-hitbox@0.12.0:
+    resolution: {integrity: sha512-iFGdGyt87OjhzKc3XpuDI/CGB19jfWdbTTPbg1P49sdtHDO5Pu3WuwWWKZuvqabsSbNIbRKsOCqZ25W/CfuP1g==}
+    dependencies:
+      '@atlaskit/pragmatic-drag-and-drop': 0.24.0
+      '@babel/runtime': 7.23.2
+    dev: false
 
   /@atlaskit/pragmatic-drag-and-drop@0.24.0:
     resolution: {integrity: sha512-5LvAC7AUzZxlKWgAzizyV/OZMFj9dVB4OpKOC0f2drddJCZfklX2Mg9SYvMgU+7aPLtAXuo97Dl+4yIpkukYHQ==}
@@ -2088,6 +2098,7 @@ packages:
     resolution: {integrity: sha512-XQ0jAPFkK/u3LcVRcvVHQcTIqD6E2H1fvZMA5dQPSOWb3suUbWbfbRf94pjc0bNzRYLfIrDRQXr7X+LHIm5oHw==}
     engines: {node: '>=12'}
     hasBin: true
+    requiresBuild: true
     optionalDependencies:
       '@esbuild/android-arm': 0.17.19
       '@esbuild/android-arm64': 0.17.19
@@ -2117,6 +2128,7 @@ packages:
     resolution: {integrity: sha512-ceqxoedUrcayh7Y7ZX6NdbbDzGROiyVBgC4PriJThBKSVPWnnFHZAkfI1lJT8QFkOwH4qOS2SJkS4wvpGl8BpA==}
     engines: {node: '>=12'}
     hasBin: true
+    requiresBuild: true
     optionalDependencies:
       '@esbuild/android-arm': 0.18.20
       '@esbuild/android-arm64': 0.18.20
