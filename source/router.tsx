@@ -1,7 +1,10 @@
 import { Router, Routes, Route } from "@solidjs/router"
 import { lazy, For } from "solid-js"
 
-const routes = [{ path: "/", load: () => import("./views/Home") }]
+const routes = [
+	{ path: "/", load: () => import("./views/Home") },
+	{ path: "/dnd", load: () => import("./views/DragAndDrop") },
+]
 
 export default () => (
 	<Router>

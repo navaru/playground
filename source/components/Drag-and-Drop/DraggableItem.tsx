@@ -11,6 +11,8 @@ import {
 	attachClosestEdge,
 	extractClosestEdge,
 } from "@atlaskit/pragmatic-drag-and-drop-hitbox/addon/closest-edge"
+import { Motion } from "@motionone/solid"
+import ElementAnimation from "./ElementAnimation"
 
 export default function DraggableItem({ id }: { id: any }) {
 	const [state, setState] = createSignal<{
@@ -27,7 +29,6 @@ export default function DraggableItem({ id }: { id: any }) {
 			combine(
 				draggable({
 					element: ref,
-
 					onDragStart(event) {
 						// event.source.element.style.display = "none"
 						// setDragElement(event.source.element)
@@ -39,7 +40,6 @@ export default function DraggableItem({ id }: { id: any }) {
 					onGenerateDragPreview({ nativeSetDragImage }) {
 						setCustomNativeDragPreview({
 							render({ container, ...rest }) {
-								console.log("rest", rest)
 								// Cause a `react` re-render to create your portal synchronously
 								setState({ type: "preview", container })
 
@@ -100,12 +100,26 @@ export default function DraggableItem({ id }: { id: any }) {
 		},
 	}
 
+	const animations = {
+		initial: { opacity: 0.3, width: "300px" },
+		animate: { opacity: 1, width: "fit-content" },
+		exit: { opacity: 0, scale: 0.6 },
+		transition: { duration: 0.3 },
+	}
+
 	return (
 		<>
-			{closureEdge() === "left" && <div innerHTML={dragElement()?.outerHTML}>aici</div>}
+			{closureEdge() === "left" && (
+				<Motion.div {...animations} innerHTML={dragElement()?.outerHTML} />
+			)}
 
-			<div ref={ref as HTMLDivElement} style={styles.element} id={`dnd-element-${id}`}>
-				Draggable Item {id}
+			<div
+				// {...animations}
+				ref={ref as HTMLDivElement}
+				style={styles.element}
+				id={`dnd-element-${id}`}
+			>
+				Draggable Item asd {id}
 			</div>
 
 			{state().type === "preview" && state()?.container && (
@@ -121,7 +135,7 @@ export default function DraggableItem({ id }: { id: any }) {
 				</Portal>
 			)}
 			{closureEdge() === "right" && (
-				<div innerHTML={dragElement()?.outerHTML}>aici</div>
+				<Motion.div {...animations} innerHTML={dragElement()?.outerHTML} />
 			)}
 		</>
 	)

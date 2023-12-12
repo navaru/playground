@@ -18,5 +18,5 @@
 			"$panda/*": ["./.local/panda/*"]
 		}
 	},
-	"include": ["*.ts", "source", ".local/panda"]
+	"include": ["*.ts", "source", ".local/panda", "*.tsx"]
 }
