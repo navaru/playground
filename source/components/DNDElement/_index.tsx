@@ -1,10 +1,10 @@
 import { Stack } from "$panda/jsx"
+import { createEffect, createSignal } from "solid-js"
 import {
 	draggable,
 	dropTargetForElements,
 } from "@atlaskit/pragmatic-drag-and-drop/adapter/element"
 import { setCustomNativeDragPreview } from "@atlaskit/pragmatic-drag-and-drop/util/set-custom-native-drag-preview"
-import { createEffect, createSignal } from "solid-js"
 import { combine } from "@atlaskit/pragmatic-drag-and-drop/util/combine"
 import {
 	attachClosestEdge,
@@ -77,7 +77,6 @@ export default function DNDElement({
 					},
 					onDragEnter: args => {
 						const node = args.source.element.cloneNode(true) as HTMLElement
-						node.setAttribute("style", "display: block")
 						setDragElement(node as HTMLElement)
 
 						if (args.self.data.id === args.source.data.id) {

@@ -4,6 +4,7 @@ import { lazy, For } from "solid-js"
 const routes = [
 	{ path: "/", load: () => import("./views/Home") },
 	{ path: "/dnd", load: () => import("./views/DragAndDrop") },
+	{ path: "/grid", load: () => import("./views/ResponsiveGrid") },
 ]
 
 export default () => (
