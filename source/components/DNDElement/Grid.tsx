@@ -1,11 +1,13 @@
 import { Stack } from "$panda/jsx"
-import { createEffect } from "solid-js"
+import { children, createEffect } from "solid-js"
 
-function Grid({ children }: { children?: any }) {
+function Grid({ children: _children }: { children?: any }) {
 	let ref: HTMLDivElement | undefined
 
+	const childrenRef = children(() => _children)
+
 	createEffect(() => {
-		if (ref) {
+		if (ref && childrenRef()) {
 			adjustGridItemsHeight(ref)
 		}
 	})
@@ -18,7 +20,7 @@ function Grid({ children }: { children?: any }) {
 			gridTemplateColumns="repeat(auto-fill, minmax(240px,1fr))"
 			gridAutoRows="180px"
 		>
-			{children}
+			{childrenRef()}
 		</Stack>
 	)
 }

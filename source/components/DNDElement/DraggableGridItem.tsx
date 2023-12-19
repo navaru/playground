@@ -10,79 +10,50 @@ import {
 	attachClosestEdge,
 	extractClosestEdge,
 } from "@atlaskit/pragmatic-drag-and-drop-hitbox/addon/closest-edge"
-import { Motion } from "@motionone/solid"
-import { cancelUnhandled } from "@atlaskit/pragmatic-drag-and-drop/addon/cancel-unhandled"
-import { disableNativeDragPreview } from "@atlaskit/pragmatic-drag-and-drop/util/disable-native-drag-preview"
 import { preserveOffsetOnSource } from "@atlaskit/pragmatic-drag-and-drop/util/preserve-offset-on-source"
 import { render } from "solid-js/web"
 
 export default function DraggableGridItem({
-	children,
+	children: _children,
 	id,
+	onDrop,
 }: {
+	onDrop: (order: any) => void
 	children?: any
 	id: number
 }) {
 	let ref: HTMLDivElement | undefined
 	const [dragElement, setDragElement] = createSignal<HTMLElement | null>(null)
-	const [isDragging, setIsDragging] = createSignal(false)
 	const [closureEdge, setClosureEdge] = createSignal<string | null>("")
-	const [state, setState] = createSignal<{
-		type: string
-		container?: HTMLElement | undefined
-	}>({ type: "idle", container: undefined })
+	const [childrenRef] = createSignal(_children)
 
 	createEffect(() => {
 		if (ref) {
 			combine(
 				draggable({
 					element: ref,
+
 					getInitialData() {
 						return {
 							type: "item",
 							id: id,
 						}
 					},
-					onDragStart(event) {
-						setIsDragging(true)
-					},
-					onDrop(event) {
-						setIsDragging(false)
-					},
-					// onGenerateDragPreview({ nativeSetDragImage, ...rest }) {
-					// 	setCustomNativeDragPreview({
-					// 		render({ container, ...rest }) {
-					// 			setState({ type: "preview", container })
-
-					// 			return () => setState({ type: "idle" })
-					// 		},
-
-					// 		nativeSetDragImage() {
-					// 			return "da"
-					// 		},
-					// 	})
-					// },
-
 					onGenerateDragPreview: ({ nativeSetDragImage, location, source }) => {
-						console.log("soucer", source)
-						console.log("location", location)
-
 						setCustomNativeDragPreview({
 							getOffset: preserveOffsetOnSource({
-								// no longer including 'source' in argument name
-								// as it is implied by the function name
-
 								element: source.element,
 								input: location.current.input,
 							}),
-							render: ({ container, ...rest }) => {
-								console.log("rest", rest)
+							render: ({ container }) => {
+								container.style.width = ref?.offsetWidth + "px"
+								container.style.height = ref?.offsetHeight + "px"
+
 								render(
 									() => (
 										<Stack
-											ref={ref}
-											// data-id={id}
-											width="auto"
+											width="100%"
+											height="100%"
 											minW="240px"
 											backgroundColor="#fff"
 											color="#000"
@@ -98,13 +69,11 @@ export default function DraggableGridItem({
 													"0 1px 2px 0 rgba(60,64,67,0.302),0 1px 3px 1px rgba(60,64,67,0.149)",
 											}}
 										>
-											{children}
+											{childrenRef().cloneNode(true)}
 										</Stack>
 									),
 									container
 								)
-
-								/* ... */
 							},
 							nativeSetDragImage,
 						})
@@ -114,9 +83,6 @@ export default function DraggableGridItem({
 				dropTargetForElements({
 					element: ref,
 					getIsSticky: () => true,
-					onDropTargetChange: args => {
-						// console.log("args", args)
-					},
 					getData({ input, element }) {
 						const data = {
 							type: "item-container",
@@ -130,12 +96,16 @@ export default function DraggableGridItem({
 						})
 					},
 					onDragEnter: args => {
-						const node = args.source.element.cloneNode(true) as HTMLElement
-						setDragElement(node as HTMLElement)
-
 						if (args.self.data.id === args.source.data.id) {
 							return setClosureEdge(null)
 						}
+						const node = args.source.element.cloneNode(true) as HTMLElement
+
+						node.style.display = "block"
+
+						setDragElement(node as HTMLElement)
+
+						args.source.element.style.display = "none"
 
 						setClosureEdge(extractClosestEdge(args.self.data))
 					},
@@ -143,15 +113,26 @@ export default function DraggableGridItem({
 						if (args.self.data.id === args.source.data.id) {
 							return setClosureEdge(null)
 						}
-
 						setClosureEdge(extractClosestEdge(args.self.data))
 					},
 					onDragLeave: () => {
 						setClosureEdge(null)
 						setDragElement(null)
 					},
-					onDrop: () => {
-						setIsDragging(false)
+					onDrop: args => {
+						const dropData = {
+							to: args.self.data.id,
+							from: args.source.data.id,
+							position: closureEdge(),
+						}
+
+						console.log(dropData)
+
+						if (onDrop) {
+							onDrop(dropData)
+						}
+
+						args.source.element.style.display = "block"
 						setClosureEdge(null)
 					},
 				})
@@ -161,11 +142,12 @@ export default function DraggableGridItem({
 
 	return (
 		<>
-			{closureEdge() === "left" && dragElement}
+			{closureEdge() === "left" && dragElement()}
 			<Stack
 				ref={ref}
-				// data-id={id}
+				data-id={id}
 				width="auto"
+				overflow="hidden"
 				minW="240px"
 				backgroundColor="#fff"
 				color="#000"
@@ -181,20 +163,9 @@ export default function DraggableGridItem({
 						"0 1px 2px 0 rgba(60,64,67,0.302),0 1px 3px 1px rgba(60,64,67,0.149)",
 				}}
 			>
-				{children}
+				{childrenRef()}
 			</Stack>
-			{closureEdge() === "right" && dragElement}
+			{closureEdge() === "right" && dragElement()}
 		</>
 	)
 }
-
-const NodeEmelent = ({ element }: { element: any }) => (
-	<Motion.div
-		// initial={{ scale: 0.8 }}
-		// animate={{ scale: 1 }}
-		// exit={{ scale: 1 }}
-		transition={{ duration: 1 }}
-	>
-		{element()}
-	</Motion.div>
-)
