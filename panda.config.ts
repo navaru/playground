@@ -1,18 +1,31 @@
 import { defineConfig } from "@pandacss/dev"
+import { createPreset } from "@park-ui/panda-preset"
 
 export default defineConfig({
-	include: ["./source/**/*.{js,jsx,ts,tsx}"],
-	exclude: ["./source/**/*.test.{js,jsx,ts,tsx}"],
-	outdir: ".local/panda",
+	include: ["./(source|stories)/**/*.{ts,tsx}"],
+	exclude: ["./source/**/*.test.{ts,tsx}"],
 
-	hash: { className: true, cssVar: false },
+	outdir: "@nore/panda",
+	emitPackage: true,
+	clean: true,
 
 	jsxFramework: "solid",
-	presets: ["@pandacss/preset-panda"],
+	preflight: true, // css defaults
+
+	presets: [
+		"@pandacss/preset-base",
+		createPreset({
+			grayColor: "sand",
+			accentColor: "ruby",
+			borderRadius: "sm",
+		}),
+	],
+
+	staticCss: {
+		recipes: "*",
+	},
 
 	studio: {
-		outdir: "./.local/studio",
-		logo: "./favicon.svg",
-		inject: { head: "", body: "" },
+		outdir: ".local/studio",
 	},
 })

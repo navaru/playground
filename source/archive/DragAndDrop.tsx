@@ -1,6 +1,6 @@
-import { Stack } from "$panda/jsx"
+import { Stack } from "@nore/panda/jsx"
 import DNDElement from "~/components/DNDElement"
-import { Motion } from "@motionone/solid"
+import { Motion } from "solid-motionone"
 
 export default function DragAndDrop() {
 	return (

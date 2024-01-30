@@ -6,7 +6,7 @@
 		"jsxImportSource": "solid-js",
 
 		"module": "ESNext",
-		"target": "ES2021",
+		"target": "ES2022",
 		"lib": ["ESNext", "DOM", "DOM.Iterable"],
 		"types": ["vite/client", "vitest/globals"],
 
@@ -15,7 +15,7 @@
 
 		"paths": {
 			"~/*": ["./source/*"],
-			"$panda/*": ["./.local/panda/*"]
+			"@nore/panda/*": ["./.local/panda/*"]
 		}
 	},
 	"include": ["*.ts", "source", ".local/panda", "*.tsx"]

@@ -1,4 +1,4 @@
-import { Stack } from "$panda/jsx"
+import { Stack } from "@nore/panda/jsx"
 
 export default function GridItem({ children }: { children?: any }) {
 	return (

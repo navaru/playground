@@ -1,4 +1,4 @@
-import { Stack } from "$panda/jsx"
+import { Stack } from "@nore/panda/jsx"
 import { createEffect, createSignal } from "solid-js"
 import {
 	draggable,

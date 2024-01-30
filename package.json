@@ -1,27 +1,30 @@
 {
 	"name": "playground",
-	"version": "0.0.0",
+	"version": "private",
+	"type": "module",
 	"scripts": {
 		"start": "vite",
-		"dev": "panda codegen --clean && vite",
+		"dev": "panda codegen --clean && vite dev",
 		"build": "vite build",
 		"serve": "vite preview"
 	},
 	"devDependencies": {
-		"@motionone/types": "^10.16.3",
-		"@pandacss/dev": "latest",
+		"@motionone/types": "^10",
+		"@pandacss/dev": "^0.29",
+		"@park-ui/panda-preset": "^0.31",
 		"typescript": "^5",
-		"vite": "^4",
+		"vite": "^5",
 		"vite-plugin-solid": "^2",
 		"vite-tsconfig-paths": "^4",
-		"vitest": "beta"
+		"vitest": "^1"
 	},
 	"dependencies": {
-		"@atlaskit/pragmatic-drag-and-drop": "latest",
-		"@atlaskit/pragmatic-drag-and-drop-hitbox": "^0.12.0",
-		"@motionone/solid": "^10.16.4",
-		"@solidjs/router": "latest",
-		"motion": "^10.16.4",
+		"@ark-ui/solid": "^2",
+		"@atlaskit/pragmatic-drag-and-drop": "^0.25",
+		"@atlaskit/pragmatic-drag-and-drop-hitbox": "^0.12",
+		"@solidjs/router": "^0.10",
+		"solid-motionone": "^1",
+		"motion": "^10",
 		"solid-js": "^1.8"
 	}
 }

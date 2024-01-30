@@ -1,4 +1,4 @@
-// declare module "@motionone/solid" {
+// declare module "solid-motionone" {
 // 	const content: any
 // 	export default content
 // }

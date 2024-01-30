@@ -11,7 +11,7 @@ import {
 	attachClosestEdge,
 	extractClosestEdge,
 } from "@atlaskit/pragmatic-drag-and-drop-hitbox/addon/closest-edge"
-import { Motion } from "@motionone/solid"
+import { Motion } from "solid-motionone"
 import ElementAnimation from "./ElementAnimation"
 
 export default function DraggableItem({ id }: { id: any }) {

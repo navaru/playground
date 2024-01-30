@@ -1,4 +1,4 @@
-import { Stack } from "$panda/jsx"
+import { Stack } from "@nore/panda/jsx"
 import { children, createEffect } from "solid-js"
 
 function Grid({ children: _children }: { children?: any }) {

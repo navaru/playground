@@ -1,4 +1,4 @@
-import { Motion } from "@motionone/solid"
+import { Motion } from "solid-motionone"
 import { createSignal } from "solid-js"
 
 export default function ElementAnimation({
