@@ -1,10 +1,10 @@
 import { Stack } from "@nore/panda/jsx"
-import { Button } from "~/components/button"
+import { DataGrid } from "~/DataGrid/DataGrid"
 
 export default function Home() {
 	return (
 		<Stack p="4">
-			<Button to="/grid">Responsive Grid</Button>
+			<DataGrid />
 		</Stack>
 	)
 }

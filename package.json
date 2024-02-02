@@ -23,8 +23,10 @@
 		"@atlaskit/pragmatic-drag-and-drop": "^0.25",
 		"@atlaskit/pragmatic-drag-and-drop-hitbox": "^0.12",
 		"@solidjs/router": "^0.10",
-		"solid-motionone": "^1",
+		"@tanstack/solid-table": "^8",
+		"@tanstack/table-core": "^8",
 		"motion": "^10",
-		"solid-js": "^1.8"
+		"solid-js": "^1.8",
+		"solid-motionone": "^1"
 	}
 }

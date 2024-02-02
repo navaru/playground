@@ -1,6 +1,6 @@
-import Grid from "~/components/DNDElement/Grid"
-import DraggableGridItem from "~/components/DNDElement/DraggableGridItem"
-import _data from "~/components/DNDElement/data"
+import Grid from "./DNDElement/Grid"
+import DraggableGridItem from "./DNDElement/DraggableGridItem"
+import _data from "./DNDElement/data"
 import { Index, createSignal } from "solid-js"
 
 const swapElements = (array: any[], index1: number, index2: number) => {
