@@ -1,8 +1,14 @@
 import { VStack } from "@nore/panda/jsx"
-import Switch from "~/StyledSwitch/Switch"
+import Switch, { useSwitch } from "~/StyledSwitch/Switch"
 import SwitchThumb from "~/StyledSwitch/SwitchThumb"
 import SwitchLabel from "~/StyledSwitch/SwitchLabel"
 import SwitchControl from "~/StyledSwitch/SwitchControl"
+
+function Interceptor() {
+	const api = useSwitch()
+
+	return <>{api.checked() ? "ON" : "OFF"}</>
+}
 
 export default function SwitchDemo() {
 	return (
@@ -12,6 +18,7 @@ export default function SwitchDemo() {
 					<SwitchThumb />
 				</SwitchControl>
 				<SwitchLabel>Styled switch demo</SwitchLabel>
+				<Interceptor />
 			</Switch>
 		</VStack>
 	)
