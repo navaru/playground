@@ -4,8 +4,6 @@ import SwitchThumb from "~/StyledSwitch/SwitchThumb"
 import SwitchLabel from "~/StyledSwitch/SwitchLabel"
 import SwitchControl from "~/StyledSwitch/SwitchControl"
 
-import { Switch as Zwitch } from "~/components/switch"
-
 export default function SwitchDemo() {
 	return (
 		<VStack p="5" gap="5">
@@ -15,8 +13,6 @@ export default function SwitchDemo() {
 				</SwitchControl>
 				<SwitchLabel>Styled switch demo</SwitchLabel>
 			</Switch>
-
-			<Zwitch>Normal</Zwitch>
 		</VStack>
 	)
 }
