@@ -1,6 +1,6 @@
 import type { HTMLStyledProps } from "@nore/panda/jsx"
 import type { RowData } from "@tanstack/solid-table"
-import { styledRecipe } from "./DataGrid.styles"
+import { styledRecipe } from "./DataGrid.styled"
 
 declare module "@tanstack/solid-table" {
 	interface ColumnMeta<TData extends RowData, TValue> {

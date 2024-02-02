@@ -1,10 +1,10 @@
-import { Stack } from "@nore/panda/jsx"
-import { DataGrid } from "~/DataGrid/DataGrid"
+import { VStack } from "@nore/panda/jsx"
 
 export default function Home() {
 	return (
-		<Stack p="4">
-			<DataGrid />
-		</Stack>
+		<VStack p="4" my="2">
+			<a href="/datagrid">DataGrid</a>
+			<a href="/switch">Styled Switch</a>
+		</VStack>
 	)
 }
