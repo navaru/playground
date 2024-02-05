@@ -32,6 +32,13 @@ export function DataGrid(props: DataGridProps) {
 										{header => (
 											<Box class="th" style={{ width: header.getSize() + "px" }}>
 												{header.column.columnDef.header}
+												<Box
+													onMouseDown={header.getResizeHandler()}
+													onTouchStart={header.getResizeHandler()}
+													class={`resizer ${
+														header.column.getIsResizing() ? "isResizing" : ""
+													}`}
+												/>
 											</Box>
 										)}
 									</For>

@@ -83,6 +83,7 @@ export function useDataGridApi(props: any) {
 			},
 		],
 		getCoreRowModel: getCoreRowModel(),
+		columnResizeMode: "onChange",
 	})
 
 	return { table } as any
