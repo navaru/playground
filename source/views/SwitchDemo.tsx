@@ -4,7 +4,7 @@ import SwitchThumb from "~/StyledSwitch/SwitchThumb"
 import SwitchLabel from "~/StyledSwitch/SwitchLabel"
 import SwitchControl from "~/StyledSwitch/SwitchControl"
 
-function Interceptor() {
+function CustomFunctionality() {
 	const api = useSwitch()
 
 	return <>{api.checked() ? "ON" : "OFF"}</>
@@ -13,12 +13,21 @@ function Interceptor() {
 export default function SwitchDemo() {
 	return (
 		<VStack p="5" gap="5">
+			{/* DEFAULT COMPONENT */}
 			<Switch checked={true}>
 				<SwitchControl>
 					<SwitchThumb />
 				</SwitchControl>
 				<SwitchLabel>Styled switch demo</SwitchLabel>
-				<Interceptor />
+			</Switch>
+
+			{/* CUSTOMIZED COMPONENT */}
+			<Switch size="sm" checked={true}>
+				<SwitchControl colorPalette="yellow" borderRadius="0">
+					<SwitchThumb borderRadius="0" mt="-1px" />
+				</SwitchControl>
+				<CustomFunctionality />
+				<SwitchLabel textStyle="sm">Customized Switch component</SwitchLabel>
 			</Switch>
 		</VStack>
 	)

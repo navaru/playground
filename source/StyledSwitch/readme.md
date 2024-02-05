@@ -20,3 +20,7 @@ The `createStyledContext` function from `~/styled` is an utility that creates a 
 
 - `useSwitchApi` is the "headless" part of the component, it takes in the required `props` from the `<Switch>` component and returns the `api` that will be used by `Switch` and all its subcomponent parts.
 - `useSwitch` is a context consumer, and has the role of providing the `api` to all its subcomponents.
+
+#### Why is this structure usedul?
+
+In `~/views/SwitchDemo.tsx` there are two versions of the switch component, one with default styles and one customized. The current structure makes it easy to extend the component, either by changing its appearance or by adding custom functionality.
