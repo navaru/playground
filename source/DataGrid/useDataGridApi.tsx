@@ -1,8 +1,18 @@
-import { createSolidTable, getCoreRowModel } from "@tanstack/solid-table"
+import {
+	createSolidTable,
+	getCoreRowModel,
+	getFilteredRowModel,
+	type Table,
+	type TableOptions,
+} from "@tanstack/solid-table"
 import DATA from "./data.mock.json"
+import { createEffect, createSignal } from "solid-js"
+import type { Filter } from "./types"
 
 export function useDataGridApi(props: any) {
-	const table = createSolidTable({
+	const [columnFilters, setColumnFilters] = createSignal<Filter[]>([])
+
+	const defaultTable = {
 		data: DATA,
 		columns: [
 			{
@@ -82,11 +92,25 @@ export function useDataGridApi(props: any) {
 				cell: (props: any) => <p>{props.getValue()}</p>,
 			},
 		],
+		state: {
+			columnFilters: columnFilters(),
+		},
 		getCoreRowModel: getCoreRowModel(),
+		getFilteredRowModel: getFilteredRowModel(),
 		columnResizeMode: "onChange",
+	} as TableOptions<any>
+
+	const [table, setTable] = createSignal<Table<any> | null>(
+		createSolidTable(defaultTable)
+	)
+
+	createEffect(() => {
+		defaultTable!.state!.columnFilters = columnFilters()
+
+		setTable(createSolidTable(defaultTable))
 	})
 
-	return { table } as any
+	return { table, columnFilters, setColumnFilters } as any
 }
 
 export default useDataGridApi

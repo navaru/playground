@@ -5,6 +5,7 @@ import styledRecipe from "./DataGrid.styled"
 import useDataGridApi from "./useDataGridApi"
 import { Box } from "@nore/panda/jsx"
 import { flexRender } from "@tanstack/solid-table"
+import Filters from "./Filters"
 
 const ApiContext = createContext<DataGridContext>()
 const useDataGrid = () => useContext(ApiContext) as DataGridContext
@@ -18,14 +19,17 @@ export function DataGrid(props: DataGridProps) {
 	const classes = toClasses(styledMap.root!, props.class)
 	const Root = styled("div")
 
-	const { table } = api
+	const { table, columnFilters, setColumnFilters } = api
+
+	console.log(table())
 
 	return (
 		<ApiContext.Provider value={api}>
 			<StyledProvider value={styledMap}>
 				<Root {...rootProps} class={classes}>
-					<Box class="table" style={{ width: table.getTotalSize() + "px" }}>
-						<For each={table.getHeaderGroups()}>
+					<Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} />
+					<Box class="table" style={{ width: table().getTotalSize() + "px" }}>
+						<For each={table().getHeaderGroups()}>
 							{headerGroup => (
 								<Box class="tr">
 									<For each={headerGroup.headers}>
@@ -45,7 +49,7 @@ export function DataGrid(props: DataGridProps) {
 								</Box>
 							)}
 						</For>
-						<For each={table.getRowModel().rows}>
+						<For each={table().getRowModel().rows}>
 							{row => (
 								<Box class="tr">
 									<For each={row.getVisibleCells()}>
