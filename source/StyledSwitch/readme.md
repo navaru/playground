@@ -14,4 +14,9 @@ The slots define the parts of the component. In our example the component is spl
 
 Each slot from the recipe provides the required style for the above component parts.
 
-The `createStyledContext` function from `~/styled` is a utility that creates a context provider and consumer that makes it simple to map slot styles to component parts.
+The `createStyledContext` function from `~/styled` is an utility that creates a context provider and consumer that makes it simple to map slot styles to component parts.
+
+#### What is the difference between `useSwitch` and `useSwitchApi`?
+
+- `useSwitchApi` is the "headless" part of the component, it takes in the required `props` from the `<Switch>` component and returns the `api` that will be used by `Switch` and all its subcomponent parts.
+- `useSwitch` is a context consumer, and has the role of providing the `api` to all its subcomponents.
