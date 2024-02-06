@@ -21,15 +21,13 @@ export function DataGrid(props: DataGridProps) {
 
 	const { table, columnFilters, setColumnFilters } = api
 
-	console.log(table())
-
 	return (
 		<ApiContext.Provider value={api}>
 			<StyledProvider value={styledMap}>
 				<Root {...rootProps} class={classes}>
 					<Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} />
-					<Box class="table" style={{ width: table().getTotalSize() + "px" }}>
-						<For each={table().getHeaderGroups()}>
+					<Box class="table" style={{ width: table.getTotalSize() + "px" }}>
+						<For each={table.getHeaderGroups()}>
 							{headerGroup => (
 								<Box class="tr">
 									<For each={headerGroup.headers}>
@@ -49,7 +47,7 @@ export function DataGrid(props: DataGridProps) {
 								</Box>
 							)}
 						</For>
-						<For each={table().getRowModel().rows}>
+						<For each={table.getRowModel().rows}>
 							{row => (
 								<Box class="tr">
 									<For each={row.getVisibleCells()}>
