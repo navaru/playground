@@ -1,7 +1,7 @@
 import type { HTMLStyledProps } from "@nore/panda/jsx"
-import type { RowData } from "@tanstack/solid-table"
+import type { ColumnDef, RowData } from "@tanstack/solid-table"
 import { styledRecipe } from "./DataGrid.styled"
-import type { Accessor, Setter } from "solid-js"
+import type { Accessor, JSX, Setter } from "solid-js"
 
 declare module "@tanstack/solid-table" {
 	interface ColumnMeta<TData extends RowData, TValue> {
@@ -13,7 +13,26 @@ export type StyledVariantProps = Parameters<typeof styledRecipe.splitVariantProp
 
 export interface DataGridContext {}
 
-export interface DataGridProps extends StyledVariantProps, HTMLStyledProps<"div"> {}
+export enum FilterType {
+	SELECT,
+	TEXT,
+	DATE,
+}
+
+export enum CellType {
+	TEXT = "TEXT",
+	DATE = "DATE",
+	MONEY = "MONEY",
+	PERCENTAGE = "PERCENTAGE",
+	BADGE = "BADGE",
+}
+
+export interface DataGridProps extends StyledVariantProps, HTMLStyledProps<"div"> {
+	data: RowData[]
+	options: (ColumnDef<RowData> & {
+		filterType?: FilterType
+	})[]
+}
 
 export interface Filter {
 	value: any
