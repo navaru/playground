@@ -2,13 +2,18 @@ import { CellType, FilterType, type DataGridProps } from "../types"
 
 const renderCellValue = (cell: any) => {
 	if (cell === CellType.DATE) {
-		return (cell: any) => new Date(cell.getValue()).toLocaleDateString()
+		return (cell: any) =>
+			(!cell.getValue() && "-") || new Date(cell.getValue()).toLocaleDateString()
 	}
 	if (cell === CellType.MONEY) {
 		return (cell: any) => `${cell.getValue().toFixed(2)} RON`
 	}
 
-	return (props: any) => props.getValue()
+	if (cell === CellType.PERCENTAGE) {
+		return (cell: any) => `${cell.getValue().toFixed(2)}%`
+	}
+
+	return cell || ((cell: any) => cell.getValue())
 }
 
 export const normalizeOptions = (
