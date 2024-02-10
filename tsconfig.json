@@ -18,5 +18,5 @@
 			"@nore/panda/*": ["./.local/panda/*"]
 		}
 	},
-	"include": ["*.ts", "source", ".local/panda", "*.tsx"]
+	"include": ["*.ts*", "source", "scripts"]
 }

@@ -9,9 +9,13 @@
 		"serve": "vite preview"
 	},
 	"devDependencies": {
+		"@faker-js/faker": "^8",
 		"@motionone/types": "^10",
 		"@pandacss/dev": "^0.29",
 		"@park-ui/panda-preset": "^0.31",
+		"@types/lodash": "^4.14.202",
+		"lodash": "^4.17.21",
+		"tsx": "^4.7.0",
 		"typescript": "^5",
 		"vite": "^5",
 		"vite-plugin-solid": "^2",
