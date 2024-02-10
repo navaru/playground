@@ -14,10 +14,12 @@ export default function SwitchDemo() {
 						accessorKey: "id",
 						header: "ID",
 					},
-
 					{
 						accessorKey: "lastName",
 						header: "Last Name",
+						filter: {
+							type: FilterType.TEXT,
+						},
 					},
 					{
 						accessorKey: "firstName",
@@ -30,7 +32,9 @@ export default function SwitchDemo() {
 					{
 						accessorKey: "status",
 						header: "Status",
-						filterType: FilterType.SELECT,
+						filter: {
+							type: FilterType.SELECT,
+						},
 					},
 					{
 						accessorKey: "invoiceDate",

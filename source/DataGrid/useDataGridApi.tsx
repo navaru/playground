@@ -4,15 +4,18 @@ import {
 	getFilteredRowModel,
 	type TableOptions,
 } from "@tanstack/solid-table"
-import DATA from "./data.mock.json"
 import { createEffect, createSignal } from "solid-js"
 import type { DataGridProps, Filter } from "./types"
 import { normalizeOptions } from "./utils/normalizeOptions"
+import { pickFields } from "./utils/pickFields"
 
 export function useDataGridApi(props: DataGridProps) {
 	const { data, options } = props
-	const [columnFilters, setColumnFilters] = createSignal<Filter[]>([])
-	const { columns } = normalizeOptions(options)
+	const { columns, filters } = normalizeOptions(options, data)
+
+	const [columnFilters, setColumnFilters] = createSignal<Filter[]>(
+		(pickFields(filters, ["id", "value"]) as { id: string; value: any }[]) || []
+	)
 
 	const table = createSolidTable({
 		data,
@@ -29,7 +32,7 @@ export function useDataGridApi(props: DataGridProps) {
 
 	createEffect(() => table.setColumnFilters(columnFilters()))
 
-	return { table, columnFilters, setColumnFilters } as any
+	return { table, filters, columnFilters, setColumnFilters } as any
 }
 
 export default useDataGridApi

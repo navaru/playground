@@ -14,9 +14,9 @@ export type StyledVariantProps = Parameters<typeof styledRecipe.splitVariantProp
 export interface DataGridContext {}
 
 export enum FilterType {
-	SELECT,
-	TEXT,
-	DATE,
+	SELECT = "SELECT",
+	TEXT = "TEXT",
+	DATE = "DATE",
 }
 
 export enum CellType {
@@ -28,9 +28,13 @@ export enum CellType {
 }
 
 export interface DataGridProps extends StyledVariantProps, HTMLStyledProps<"div"> {
-	data: RowData[]
+	data: Record<string, string>[]
 	options: (ColumnDef<RowData> & {
-		filterType?: FilterType
+		filter?: {
+			type: FilterType
+			options?: string[]
+			defaultValue?: string | string[]
+		}
 	})[]
 }
 
@@ -42,4 +46,10 @@ export interface Filter {
 export interface FiltersProps {
 	columnFilters: Accessor<Filter[]>
 	setColumnFilters: Setter<Filter[]>
+	filters: {
+		type: FilterType
+		options?: string[]
+		id: string
+		value: string[] | string
+	}[]
 }

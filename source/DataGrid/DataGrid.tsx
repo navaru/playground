@@ -19,13 +19,17 @@ export function DataGrid(props: DataGridProps) {
 	const classes = toClasses(styledMap.root!, props.class)
 	const Root = styled("div")
 
-	const { table, columnFilters, setColumnFilters } = api
+	const { table, filters, columnFilters, setColumnFilters } = api
 
 	return (
 		<ApiContext.Provider value={api}>
 			<StyledProvider value={styledMap}>
 				<Root {...rootProps} class={classes}>
-					<Filters columnFilters={columnFilters} setColumnFilters={setColumnFilters} />
+					<Filters
+						filters={filters}
+						columnFilters={columnFilters}
+						setColumnFilters={setColumnFilters}
+					/>
 					<Box class="table" style={{ width: table.getTotalSize() + "px" }}>
 						<For each={table.getHeaderGroups()}>
 							{headerGroup => (
