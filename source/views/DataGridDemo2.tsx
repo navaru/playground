@@ -1,11 +1,29 @@
 import { Stack } from "@nore/panda/jsx"
-import DataGrid from "~/DataGrid/DataGrid"
+import DataGrid, { useStyled } from "~/DataGridV2/DataGrid"
 import accounts from "~/accounts.json"
 import invoices from "~/invoices.json"
-import DATA from "../DataGrid/data.mock.json"
 
 import { CellType, FilterType } from "~/DataGrid/types"
 import { For } from "solid-js"
+import { DataHeader } from "~/DataGridV2/DataHeader"
+import type { Header } from "@tanstack/table-core"
+import { HeaderCell } from "~/DataGridV2/HeaderCell"
+import styled from "~/styled"
+import { DataBody } from "~/DataGridV2/DataBody"
+import { BodyCell } from "~/DataGridV2/BodyCell"
+import { DataRow } from "~/DataGridV2/DataRow"
+
+function Resizer({ header }: { header: Header<any, any> }) {
+	const Resizer = styled("div")
+
+	return (
+		<Resizer
+			onMouseDown={header.getResizeHandler()}
+			onTouchStart={header.getResizeHandler()}
+			class={`resizer ${header.column.getIsResizing() ? "isResizing" : ""}`}
+		/>
+	)
+}
 
 function RenderItems({ items }: { items: any[] }) {
 	return (
@@ -16,8 +34,6 @@ function RenderItems({ items }: { items: any[] }) {
 }
 
 export default function SwitchDemo() {
-	console.log({ accounts, invoices })
-
 	return (
 		<Stack p="5">
 			<DataGrid
@@ -106,7 +122,38 @@ export default function SwitchDemo() {
 						cell: (cell: any) => <p>{cell.getValue().name}</p>,
 					},
 				]}
-			/>
+			>
+				<DataHeader>
+					{headers => (
+						<For each={headers}>
+							{header => (
+								<HeaderCell data={header}>
+									{value => (
+										<>
+											{value} <Resizer header={header} />
+										</>
+									)}
+								</HeaderCell>
+							)}
+						</For>
+					)}
+				</DataHeader>
+				<DataBody>
+					{rows => (
+						<For each={rows}>
+							{row => (
+								<DataRow data={row}>
+									{row => (
+										<For each={row.getVisibleCells()}>
+											{cell => <BodyCell data={cell}>{value => value}</BodyCell>}
+										</For>
+									)}
+								</DataRow>
+							)}
+						</For>
+					)}
+				</DataBody>
+			</DataGrid>
 		</Stack>
 	)
 }

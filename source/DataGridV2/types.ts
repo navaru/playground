@@ -1,7 +1,21 @@
 import type { HTMLStyledProps } from "@nore/panda/jsx"
-import type { ColumnDef, RowData, Table } from "@tanstack/solid-table"
+import type {
+	Cell,
+	ColumnDef,
+	Header,
+	HeaderGroup,
+	Row,
+	RowData,
+	Table,
+} from "@tanstack/solid-table"
 import { styledRecipe } from "./DataGrid.styled"
-import type { Accessor, JSX, Setter } from "solid-js"
+import {
+	type JSX,
+	type Accessor,
+	type ChildrenReturn,
+	type JSXElement,
+	type Setter,
+} from "solid-js"
 
 declare module "@tanstack/solid-table" {
 	interface ColumnMeta<TData extends RowData, TValue> {
@@ -30,7 +44,7 @@ export enum CellType {
 }
 
 export interface DataGridProps extends StyledVariantProps, HTMLStyledProps<"div"> {
-	data: Record<string, string>[]
+	data: Record<string, any>[]
 	options: (ColumnDef<RowData> & {
 		filter?: {
 			type: FilterType
@@ -54,4 +68,27 @@ export interface FiltersProps {
 		id: string
 		value: string[] | string
 	}[]
+}
+
+export type DataHeaderProps = HTMLStyledProps<"div"> & {
+	children: (data: Header<any, unknown>[]) => JSX.Element
+}
+
+export type DataBodyProps = HTMLStyledProps<"div"> & {
+	children: (data: Row<any>[]) => JSX.Element
+}
+
+export type DataHeaderCell = HTMLStyledProps<"div"> & {
+	children: (value: any, isResizing: boolean) => JSX.Element | string
+	data: Header<any, unknown>
+}
+
+export type DataBodyCell = HTMLStyledProps<"div"> & {
+	children: (value: any) => JSX.Element | string
+	data: Cell<any, unknown>
+}
+
+export type DataRowProps = HTMLStyledProps<"div"> & {
+	children: (row: Row<any>) => JSX.Element | string
+	data: Row<any>
 }

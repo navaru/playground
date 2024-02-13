@@ -32,7 +32,7 @@ export function useDataGridApi(props: DataGridProps) {
 
 	createEffect(() => table.setColumnFilters(columnFilters()))
 
-	return { table, filters, columnFilters, setColumnFilters }
+	return { table, filters, columnFilters, setColumnFilters } as any
 }
 
 export default useDataGridApi

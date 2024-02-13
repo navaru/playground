@@ -14,8 +14,8 @@
 		"outDir": ".local/build",
 
 		"paths": {
-			"~/*": ["./source/*"],
-			"@nore/panda/*": ["./.local/panda/*"]
+			"~/*": ["./source/*"]
+			// "@nore/panda/*": ["./.local/panda/*"]
 		}
 	},
 	"include": ["*.ts*", "source", "scripts"]
