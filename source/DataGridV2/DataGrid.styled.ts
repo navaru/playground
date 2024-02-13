@@ -4,21 +4,17 @@ export const styledRecipe = sva({
 	slots: ["root", "row", "cell", "header", "headerCell", "body"],
 	base: {
 		root: {
+			position: "relative",
 			// border: "1px solid #424242",
 		},
 		row: {
-			display: "grid",
+			display: "flex",
 			width: "fit-content",
-			borderBottomStyle: "solid",
-			gridAutoFlow: "column",
 		},
 		cell: {
 			boxShadow: "inset 0 0 0 1px #424242",
 			overflow: "hidden",
 			padding: "5px 10px",
-			flexShrink: 1,
-			flexGrow: 1,
-			borderCollapse: "collapse",
 
 			"& > input": {
 				margin: "1px",
@@ -29,8 +25,6 @@ export const styledRecipe = sva({
 		},
 
 		headerCell: {
-			flexShrink: 1,
-			flexGrow: 1,
 			position: "relative",
 			display: "flex",
 			justifyContent: "center",

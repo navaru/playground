@@ -19,7 +19,11 @@ export function DataGrid(props: DataGridProps) {
 	return (
 		<ApiContext.Provider value={api}>
 			<StyledProvider value={styledMap}>
-				<Root {...rootProps} class={classes} w={api.table.getTotalSize() + "px"}>
+				<Root
+					{...rootProps}
+					class={classes}
+					style={{ width: api.table.getTotalSize() + "px" }}
+				>
 					{props.children}
 				</Root>
 			</StyledProvider>

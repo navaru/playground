@@ -7,7 +7,7 @@ export function HeaderCell(props: DataHeaderCell) {
 	const value = props.data.column.columnDef.header
 
 	return (
-		<Styled {...props} w={props.data.getSize() + "px"} class={classes}>
+		<Styled {...props} style={{ width: props.data.getSize() + "px" }} class={classes}>
 			{props.children(value, props.data.column.getIsResizing())}
 		</Styled>
 	)
