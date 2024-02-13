@@ -15,6 +15,7 @@ import {
 	type ChildrenReturn,
 	type JSXElement,
 	type Setter,
+	type ParentProps,
 } from "solid-js"
 
 declare module "@tanstack/solid-table" {
@@ -70,25 +71,37 @@ export interface FiltersProps {
 	}[]
 }
 
-export type DataHeaderProps = HTMLStyledProps<"div"> & {
-	children: (data: Header<any, unknown>[]) => JSX.Element
+type Children<T> = (data: T) => JSX.Element
+
+export interface DataHeaderProps
+	extends Omit<HTMLStyledProps<"div">, "children">,
+		Omit<ParentProps, "children"> {
+	children: Children<Header<any, unknown>[]>
 }
 
-export type DataBodyProps = HTMLStyledProps<"div"> & {
-	children: (data: Row<any>[]) => JSX.Element
+export interface DataBodyProps
+	extends Omit<HTMLStyledProps<"div">, "children">,
+		Omit<ParentProps, "children"> {
+	children: Children<Row<any>[]>
 }
 
-export type DataHeaderCell = HTMLStyledProps<"div"> & {
+export interface DataHeaderCell
+	extends Omit<HTMLStyledProps<"div">, "children">,
+		Omit<ParentProps, "children"> {
 	children: (value: any, isResizing: boolean) => JSX.Element | string
 	data: Header<any, unknown>
 }
 
-export type DataBodyCell = HTMLStyledProps<"div"> & {
-	children: (value: any) => JSX.Element | string
+export interface DataBodyCell
+	extends Omit<HTMLStyledProps<"div">, "children">,
+		Omit<ParentProps, "children"> {
+	children: Children<any>
 	data: Cell<any, unknown>
 }
 
-export type DataRowProps = HTMLStyledProps<"div"> & {
-	children: (row: Row<any>) => JSX.Element | string
+export interface DataRowProps
+	extends Omit<HTMLStyledProps<"div">, "children">,
+		Omit<ParentProps, "children"> {
+	children: Children<Row<any>>
 	data: Row<any>
 }

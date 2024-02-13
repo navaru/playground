@@ -1,6 +1,5 @@
 import { Stack } from "@nore/panda/jsx"
 import DataGrid, { useStyled } from "~/DataGridV2/DataGrid"
-import accounts from "~/accounts.json"
 import invoices from "~/invoices.json"
 
 import { CellType, FilterType } from "~/DataGrid/types"

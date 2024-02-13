@@ -1,7 +1,8 @@
+import type { JSX } from "solid-js"
 import { useDataGrid, useStyled } from "./DataGrid"
 import type { DataHeaderProps } from "./types"
 
-export function DataHeader(props: DataHeaderProps) {
+export function DataHeader(props: DataHeaderProps): JSX.Element {
 	const { Styled, classes } = useStyled("div", "row", props.class)
 
 	const { table } = useDataGrid()
