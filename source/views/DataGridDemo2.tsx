@@ -1,8 +1,8 @@
 import { Stack } from "@nore/panda/jsx"
-import DataGrid, { useStyled } from "~/DataGridV2/DataGrid"
+import DataGrid from "~/DataGridV2/DataGrid"
 import invoices from "~/invoices.json"
 
-import { CellType, FilterType } from "~/DataGrid/types"
+import { CellType } from "~/DataGrid/types"
 import { For } from "solid-js"
 import { DataHeader } from "~/DataGridV2/DataHeader"
 import type { Header } from "@tanstack/table-core"
@@ -11,6 +11,8 @@ import styled from "~/styled"
 import { DataBody } from "~/DataGridV2/DataBody"
 import { BodyCell } from "~/DataGridV2/BodyCell"
 import { DataRow } from "~/DataGridV2/DataRow"
+import { Filter } from "~/DataGridV2/Filter"
+import { Pagination } from "~/DataGridV2/Pagination"
 
 function Resizer({ header }: { header: Header<any, any> }) {
 	const Resizer = styled("div")
@@ -32,7 +34,11 @@ function RenderItems({ items }: { items: any[] }) {
 	)
 }
 
-export default function SwitchDemo() {
+function onChangeFilter(filters: any) {
+	console.log("filters", filters)
+}
+
+export default function DataGridDemo() {
 	return (
 		<Stack p="5">
 			<DataGrid
@@ -53,9 +59,6 @@ export default function SwitchDemo() {
 					{
 						accessorKey: "status",
 						header: "Status",
-						filter: {
-							type: FilterType.SELECT,
-						},
 					},
 					{
 						accessorKey: "code",
@@ -122,6 +125,15 @@ export default function SwitchDemo() {
 					},
 				]}
 			>
+				<Filter name="status" onChange={onChangeFilter} native={false}>
+					{filter => (
+						<input
+							type="text"
+							value={filter.value}
+							onInput={e => filter.onChange(e.target.value)}
+						/>
+					)}
+				</Filter>
 				<DataHeader>
 					{headers => (
 						<For each={headers}>
@@ -152,6 +164,24 @@ export default function SwitchDemo() {
 						</For>
 					)}
 				</DataBody>
+				<Pagination>
+					{({
+						onChange,
+						nextPage,
+						prevPage,
+						state,
+						totalPages,
+						canNextPage,
+						canPrevPage,
+					}) => (
+						<>
+							{canPrevPage() && <button onClick={prevPage}>Previous</button>}
+							{state().pageIndex + 1} of {totalPages}
+							{canNextPage() && <button onClick={nextPage}>Next</button>}
+							<input type="number" onChange={e => onChange(+e.target.value)} />
+						</>
+					)}
+				</Pagination>
 			</DataGrid>
 		</Stack>
 	)

@@ -17,6 +17,7 @@ import {
 	type Setter,
 	type ParentProps,
 } from "solid-js"
+import type { initial } from "lodash"
 
 declare module "@tanstack/solid-table" {
 	interface ColumnMeta<TData extends RowData, TValue> {
@@ -28,6 +29,12 @@ export type StyledVariantProps = Parameters<typeof styledRecipe.splitVariantProp
 
 export interface DataGridContext {
 	table: Table<any>
+	columnFilters: Accessor<Filter[]>
+	setColumnFilters: Setter<Filter[]>
+	pagination: {
+		state: Accessor<{ pageIndex: number; pageSize: number }>
+		goToPage: (pageIndex: number) => void
+	}
 }
 
 export enum FilterType {
@@ -104,4 +111,28 @@ export interface DataRowProps
 		Omit<ParentProps, "children"> {
 	children: Children<Row<any>>
 	data: Row<any>
+}
+
+export interface FilterProps
+	extends Omit<HTMLStyledProps<"div">, "children" | "onChange">,
+		Omit<ParentProps, "children" | "onChange"> {
+	name: string
+	initialValue?: string
+	native?: boolean
+	onChange?: (value: Filter[]) => void
+	children: Children<{ value: any; onChange: (value: any) => void }>
+}
+
+export interface PaginationProps
+	extends Omit<HTMLStyledProps<"div">, "children" | "onChange">,
+		Omit<ParentProps, "children" | "onChange"> {
+	children: Children<{
+		onChange: (pageIndex: number) => void
+		nextPage: () => void
+		prevPage: () => void
+		state: Accessor<{ pageIndex: number; pageSize: number }>
+		totalPages: number
+		canNextPage: Accessor<boolean>
+		canPrevPage: Accessor<boolean>
+	}>
 }

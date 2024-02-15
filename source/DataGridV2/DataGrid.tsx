@@ -11,7 +11,6 @@ const { StyledProvider, useStyled } = createStyledContext(styledRecipe)
 export function DataGrid(props: DataGridProps) {
 	const [variantProps, rootProps] = styledRecipe.splitVariantProps(props)
 	const api = useDataGridApi(props)
-
 	const styledMap = styledRecipe(variantProps)
 	const classes = toClasses(styledMap.root!, props.class)
 	const Root = styled("div")
