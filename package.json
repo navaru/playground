@@ -6,6 +6,7 @@
 		"start": "vite",
 		"dev": "panda codegen --clean && vite dev",
 		"build": "vite build",
+		"gmaps": "tsx scripts/gmaps",
 		"serve": "vite preview"
 	},
 	"devDependencies": {
@@ -13,9 +14,10 @@
 		"@motionone/types": "^10",
 		"@pandacss/dev": "^0.29",
 		"@park-ui/panda-preset": "^0.31",
-		"@types/lodash": "^4.14.202",
-		"lodash": "^4.17.21",
-		"tsx": "^4.7.0",
+		"@types/lodash": "^4",
+		"node-fetch": "^3",
+		"lodash": "^4",
+		"tsx": "^4",
 		"typescript": "^5",
 		"vite": "^5",
 		"vite-plugin-solid": "^2",
